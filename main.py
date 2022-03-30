@@ -11,6 +11,7 @@ data = endpoints.leagueleaders.LeagueLeaders()
 # Our "data" variable now has built in functions such as creating a dataframe for our data
 # df = data.league_leaders.get_data_frame()
 df = data.league_leaders.get_data_frame()
+# test
 
 # First we need to get per game stats.
 # We divide each variable by games played (GP) to get per game average
