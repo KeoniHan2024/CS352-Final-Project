@@ -64,6 +64,11 @@ perGameFrame_back_btn.pack()
 #=========== Overall League Frame Code ==============
     #Instances
 name_var=tk.StringVar()
+clicked = tk.StringVar()
+measureableStats = [
+    "Field Goals Attempted vs. Points per Game",
+    "Field Goal % vs. Points per Game",
+]
 
     # Titles
 overallLeague_title = tk.Label(overallLeagueFrame, text = 'Overall League Analysis', font=('orbitron', 25))
@@ -73,11 +78,12 @@ overallLeague_title.pack(fill='x')
 overallLeague_back_btn = tk.Button(overallLeagueFrame, text = 'Back', font=('orbitron', 10), command=lambda:show_frame(mainMenuFrame))
 overallLeague_back_btn.pack()
 
-overallLeague_calc_btn = tk.Button(overallLeagueFrame, text = 'Analyze', font=('orbitron', 15), command=lambda:fga_vs_ppg(name_var.get()))
+overallLeague_calc_btn = tk.Button(overallLeagueFrame, text = 'Analyze', font=('orbitron', 15), command=lambda:statChooser(name_var.get(), clicked.get()))
 overallLeague_calc_btn.pack()
 
-overallLeague_save_btn = tk.Button(overallLeagueFrame, text = 'Save Graph', font=('orbitron', 15), command=lambda:savePlot())
-overallLeague_save_btn.pack()
+    # Option Menus
+drop = tk.OptionMenu(overallLeagueFrame , clicked, *measureableStats)
+drop.pack()
 
     # Entries
 overallLeague_name_entry = tk.Entry(overallLeagueFrame, textvariable=name_var)
