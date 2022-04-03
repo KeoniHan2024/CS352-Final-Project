@@ -52,9 +52,9 @@ def fgp_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
+    plt.annotate(df.PLAYER[index[0]],       # This the name of the top scoring player. Refer to the .head() from earlier
         (x[0], y[0]),                       # This is the point we want to annotate.  
-        (x[0]-2,y[0]),                    # These are coords for the text
+        (x[0]-2,y[0]),                      # These are coords for the text
         arrowprops=dict(arrowstyle='-'))    # Here we use a flat line for the arrow '-'
     plt.show()
     plt.clf()
