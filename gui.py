@@ -68,6 +68,7 @@ clicked = tk.StringVar()
 measureableStats = [
     "Field Goals Attempted vs. Points per Game",
     "Field Goal % vs. Points per Game",
+    "3 Point Field Goals Attempted vs. Points per Game"
 ]
 
     # Titles

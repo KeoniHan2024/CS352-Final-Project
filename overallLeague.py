@@ -20,24 +20,26 @@ def statChooser(playerName, typeOfStat):
     elif typeOfStat == 'Field Goal % vs. Points per Game':
         fgp_vs_ppg(playerName)
         return
+    elif typeOfStat == '3 Point Field Goals Attempted vs. Points per Game':
+        tpfga_vs_ppg(playerName)
     else:
         messagebox.showerror(
             title="No stat comparison chosen", 
             message="Please select a stat comparison in the drop box")
         return
 
-def fgp_vs_ppg(playerName):
+def tpfga_vs_ppg(playerName):
     data = endpoints.LeagueLeaders()
     df = data.league_leaders.get_data_frame()
-    x,y = df.FG_PCT, df.PTS
+    x,y = df.FG3A, df.PTS
 
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    plt.scatter(x, y, s=15, alpha=.5)                            # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
-    plt.title('NBA - Relationship Between FG % and Total Points')  # Give it a title
-    plt.xlabel('Field Goal Percentage')                                   # Label x-axis
-    plt.ylabel('Total Points')                                # Label y-axis
+    plt.scatter(x, y, s=15, alpha=.5)                                                   # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
+    plt.title('NBA - Relationship Between 3-Point FG Attempted and Total Points')       # Give it a title
+    plt.xlabel('Total 3-Point Field Goals Attempted')                                   # Label x-axis
+    plt.ylabel('Total Points')                                                          # Label y-axis
 
     if playerName == "":
         plt.show()
@@ -52,10 +54,44 @@ def fgp_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],       # This the name of the top scoring player. Refer to the .head() from earlier
-        (x[0], y[0]),                       # This is the point we want to annotate.  
-        (x[0]-2,y[0]),                      # These are coords for the text
-        arrowprops=dict(arrowstyle='-'))    # Here we use a flat line for the arrow '-'
+    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
+        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
+        (x[index[0]],y[index[0]]-5),                        # These are coords for the text
+        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
+    plt.show()
+    plt.clf()
+    return
+
+def fgp_vs_ppg(playerName):
+    data = endpoints.LeagueLeaders()
+    df = data.league_leaders.get_data_frame()
+    x,y = df.FG_PCT, df.PTS
+
+    x = np.array(x).reshape(-1,1)
+    y = np.array(y).reshape(-1,1)
+
+    plt.scatter(x, y, s=15, alpha=.5)                                       # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
+    plt.title('NBA - Relationship Between FG % and Total Points')           # Give it a title
+    plt.xlabel('Field Goal Percentage')                                     # Label x-axis
+    plt.ylabel('Total Points')                                              # Label y-axis
+
+    if playerName == "":
+        plt.show()
+        return
+
+    playerName = playerName.title()
+    index = df.index[df['PLAYER']==playerName].to_list()
+
+    if not index:
+        messagebox.showerror(
+            title="Invalid Player Name", 
+            message="Please type in a valid NBA player")
+        return
+
+    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
+        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
+        (x[index[0]]-2,y[index[0]]),                        # These are coords for the text
+        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
     plt.show()
     plt.clf()
     return
@@ -100,9 +136,9 @@ def fga_vs_ppg(playerName):
         return
 
     plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
-        (x[0], y[0]),                       # This is the point we want to annotate.  
-        (x[0]-7,y[0]-2),                    # These are coords for the text
-        arrowprops=dict(arrowstyle='-'))    # Here we use a flat line for the arrow '-'
+        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
+        (x[index[0]]-3,y[index[0]]-2),                      # These are coords for the text
+        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
     plt.show()
     plt.clf()
     return
