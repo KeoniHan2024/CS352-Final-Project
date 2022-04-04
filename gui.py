@@ -70,21 +70,20 @@ measureableStats = [
     "Field Goal % vs. Points per Game",
     "3 Point Field Goals Attempted vs. Points per Game"
 ]
-
     # Titles
 overallLeague_title = tk.Label(overallLeagueFrame, text = 'Overall League Analysis', font=('orbitron', 25))
 overallLeague_title.pack(fill='x')
 
-    # Buttons
-overallLeague_back_btn = tk.Button(overallLeagueFrame, text = 'Back', font=('orbitron', 10), command=lambda:show_frame(mainMenuFrame))
-overallLeague_back_btn.pack()
-
-overallLeague_calc_btn = tk.Button(overallLeagueFrame, text = 'Analyze', font=('orbitron', 15), command=lambda:statChooser(name_var.get(), clicked.get()))
-overallLeague_calc_btn.pack()
-
     # Option Menus
 drop = tk.OptionMenu(overallLeagueFrame , clicked, *measureableStats)
 drop.pack()
+
+    # Buttons
+overallLeague_calc_btn = tk.Button(overallLeagueFrame, text = 'Analyze', font=('orbitron', 15), command=lambda:statChooser(name_var.get(), clicked.get()))
+overallLeague_calc_btn.pack()
+
+overallLeague_back_btn = tk.Button(overallLeagueFrame, text = 'Back', font=('orbitron', 10), command=lambda:show_frame(mainMenuFrame))
+overallLeague_back_btn.pack()
 
     # Entries
 overallLeague_name_entry = tk.Entry(overallLeagueFrame, textvariable=name_var)
