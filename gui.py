@@ -17,6 +17,9 @@ from overallLeague import *
 def show_frame(newFrame):
     newFrame.tkraise()
 
+def callStatChoose(event):
+    statChooser(name_var.get(), clicked.get())
+
 # Initializes the window and the main menu frame
 window = tk.Tk()
 window.state('zoomed')
@@ -87,4 +90,7 @@ overallLeague_back_btn.pack()
 
     # Entries
 overallLeague_name_entry = tk.Entry(overallLeagueFrame, textvariable=name_var)
+overallLeague_name_entry.bind('<Return>', callStatChoose)
 overallLeague_name_entry.pack()
+
+window.mainloop()

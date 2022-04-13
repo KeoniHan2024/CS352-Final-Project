@@ -13,6 +13,12 @@ from tkinter import messagebox
 # Class imports
 from gui import *
 
+""" This method gets a value from the drop down box and finds the specific method to call,
+    if there is nothing selected it will show an error.
+Args:
+    playerName (String): the specified player that will be annotated in the graph
+    typeOfStat (String): the specific data comparison it will be choosing
+"""
 def statChooser(playerName, typeOfStat):
     if typeOfStat == 'Field Goals Attempted vs. Points per Game':
         fga_vs_ppg(playerName)
@@ -22,6 +28,7 @@ def statChooser(playerName, typeOfStat):
         return
     elif typeOfStat == '3 Point Field Goals Attempted vs. Points per Game':
         tpfga_vs_ppg(playerName)
+        return
     else:
         messagebox.showerror(
             title="No stat comparison chosen", 
