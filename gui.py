@@ -1,9 +1,3 @@
-# import pandas as pd
-# import numpy as np
-# from sklearn import linear_model
-# import requests
-# from nba_api.stats import endpoints
-# from matplotlib import pyplot as plt
 import tkinter as tk
 from overallLeague import *
 
@@ -45,9 +39,9 @@ mainMenuFrame_title = tk.Label(mainMenuFrame, text = 'Main Menu', font=('orbitro
 mainMenuFrame_title.pack(fill='x')
 
     # Buttons
-mainMenuFrame_PG_btn = tk.Button(mainMenuFrame, text = 'Analyze Per Game Stats', font=('orbitron', 15), command=lambda:show_frame(perGameFrame))
-mainMenuFrame_PG_btn.config(height = 5, width=50)
-mainMenuFrame_PG_btn.pack()
+# mainMenuFrame_PG_btn = tk.Button(mainMenuFrame, text = 'Analyze Per Game Stats', font=('orbitron', 15), command=lambda:show_frame(perGameFrame))
+# mainMenuFrame_PG_btn.config(height = 5, width=50)
+# mainMenuFrame_PG_btn.pack()
 
 mainMenuFrame_OVRLL_btn = tk.Button(mainMenuFrame, text = 'Overall League Analysis',font=('orbitron', 15), command=lambda:show_frame(overallLeagueFrame))
 mainMenuFrame_OVRLL_btn.config(height = 5, width=50)

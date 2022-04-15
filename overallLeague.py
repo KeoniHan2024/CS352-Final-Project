@@ -1,9 +1,7 @@
 from argparse import FileType
-from tkinter.filedialog import asksaveasfile, asksaveasfilename
 import pandas as pd
 import numpy as np
-from sklearn import linear_model
-import requests
+from sklearn import linear_linearLine
 from nba_api.stats import endpoints
 from matplotlib import pyplot as plt
 
@@ -43,10 +41,10 @@ def tpfga_vs_ppg(playerName):
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    plt.scatter(x, y, s=15, alpha=.5)                                                   # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
-    plt.title('NBA - Relationship Between 3-Point FG Attempted and Total Points')       # Give it a title
-    plt.xlabel('Total 3-Point Field Goals Attempted')                                   # Label x-axis
-    plt.ylabel('Total Points')                                                          # Label y-axis
+    plt.scatter(x, y, s=15, alpha=.5)                                                   # Specifies the plot type
+    plt.title('NBA - Relationship Between 3-Point FG Attempted and Total Points')       # Title
+    plt.xlabel('Total 3-Point Field Goals Attempted')                                   # x-axis label
+    plt.ylabel('Total Points')                                                          # y-axis label
 
     if playerName == "":
         plt.show()
@@ -61,10 +59,10 @@ def tpfga_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
-        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
-        (x[index[0]],y[index[0]]-5),                        # These are coords for the text
-        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
+    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+        (x[index[0]], y[index[0]]),                         # Index to point to that player 
+        (x[index[0]],y[index[0]]-5),                        # Coordinates to place the text
+        arrowprops=dict(arrowstyle='-'))                    # type of line to draw towards point
     plt.show()
     plt.clf()
     return
@@ -77,10 +75,10 @@ def fgp_vs_ppg(playerName):
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    plt.scatter(x, y, s=15, alpha=.5)                                       # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
-    plt.title('NBA - Relationship Between FG % and Total Points')           # Give it a title
-    plt.xlabel('Field Goal Percentage')                                     # Label x-axis
-    plt.ylabel('Total Points')                                              # Label y-axis
+    plt.scatter(x, y, s=15, alpha=.5)                                       # Specifies the plot type
+    plt.title('NBA - Relationship Between FG % and Total Points')           # Title
+    plt.xlabel('Field Goal Percentage')                                     # x-axis label
+    plt.ylabel('Total Points')                                              # y-axis label
 
     if playerName == "":
         plt.show()
@@ -95,10 +93,9 @@ def fgp_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
-        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
-        (x[index[0]]-2,y[index[0]]),                        # These are coords for the text
-        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
+    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+        (x[index[0]], y[index[0]]),                         # Index to point to that player 
+        arrowprops=dict(arrowstyle='-'))                    # type of line to draw towards point
     plt.show()
     plt.clf()
     return
@@ -113,21 +110,20 @@ def fga_vs_ppg(playerName):
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    # Creates a linear regression using FGA and PPG as x and y axis
-    model = linear_model.LinearRegression()
-    model.fit(x,y)
+    # creates the linear regression line
+    linearLine = linear_linearLine.LinearRegression()
+    linearLine.fit(x,y)
 
-    r2 = round(model.score(x,y), 2 )
-    predicted_y = model.predict(x)
+    r2 = round(linearLine.score(x,y), 2 )
+    predicted_y = linearLine.predict(x)
 
-    # Now, lets make a plot with matplot lib using a iterative approach (which is easy to read)
 
-    plt.scatter(x, y, s=15, alpha=.5)                            # Scatterplot:  Specfiy size(s) and transparency(alpha) of dots
-    plt.plot(x, predicted_y, color = 'black')                    # line: Add line for regression line w/ predicted values
-    plt.title('NBA - Relationship Between FGA and PPG')          # Give it a title
-    plt.xlabel('FGA per Game')                                   # Label x-axis
-    plt.ylabel('Points Per Game')                                # Label y-axis
-    plt.text(10,25, f'R2={r2}')                                  # 10, 25 are the coordinates for our text. Adjust accordingly
+    plt.scatter(x, y, s=15, alpha=.5)                            
+    plt.plot(x, predicted_y, color = 'black')                   
+    plt.title('NBA - Relationship Between FGA and PPG')          
+    plt.xlabel('FGA per Game')                                  
+    plt.ylabel('Points Per Game')                                
+    plt.text(10,25, f'R2={r2}')                                  # labels the linear coorelation
 
     if playerName == "":
         plt.show()
@@ -142,10 +138,10 @@ def fga_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # This the name of the top scoring player. Refer to the .head() from earlier
-        (x[index[0]], y[index[0]]),                         # This is the point we want to annotate.  
-        (x[index[0]]-3,y[index[0]]-2),                      # These are coords for the text
-        arrowprops=dict(arrowstyle='-'))                    # Here we use a flat line for the arrow '-'
+    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+        (x[index[0]], y[index[0]]),                           # Index to point to that player 
+        (x[index[0]]-3,y[index[0]]-2),                     # Coordinates to place the text
+        arrowprops=dict(arrowstyle='-'))                   # type of line to draw towards point
     plt.show()
     plt.clf()
     return
