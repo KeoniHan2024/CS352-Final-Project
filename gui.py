@@ -1,5 +1,5 @@
 import tkinter as tk
-from overallLeague import *
+from statAnalysis import *
 
 """show_frame 
 

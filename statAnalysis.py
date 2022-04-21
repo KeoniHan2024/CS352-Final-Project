@@ -1,7 +1,7 @@
 from argparse import FileType
 import pandas as pd
 import numpy as np
-from sklearn import linear_linearLine
+from sklearn import linear_model
 from nba_api.stats import endpoints
 from matplotlib import pyplot
 from tkinter import messagebox
@@ -31,6 +31,11 @@ def statChooser(playerName, typeOfStat):
             message="Please select a stat comparison in the drop box")
         return
 
+""" This method gets a string for a player name and compares the three point field goals attempted vs 
+    the leagues points per game. To see how they corelate
+Args:
+    playerName (String): the specified player that will be annotated in the graph
+"""
 def tpfga_vs_ppg(playerName):
     data = endpoints.LeagueLeaders()
     df = data.league_leaders.get_data_frame()
@@ -65,6 +70,11 @@ def tpfga_vs_ppg(playerName):
     pyplot.clf()
     return
 
+""" This method gets a string for a player name and compares the field goal percentage vs 
+    the leagues points per game. To see how they corelate
+Args:
+    playerName (String): the specified player that will be annotated in the graph
+"""
 def fgp_vs_ppg(playerName):
     data = endpoints.LeagueLeaders()
     df = data.league_leaders.get_data_frame()
@@ -98,7 +108,11 @@ def fgp_vs_ppg(playerName):
     pyplot.clf()
     return
 
-
+""" This method gets a string for a player name and compares the total field goal attempted vs 
+    the leagues points per game. To see how they corelate
+Args:
+    playerName (String): the specified player that will be annotated in the graph
+"""
 def fga_vs_ppg(playerName):
     data = endpoints.LeagueLeaders()
     df = data.league_leaders.get_data_frame()
@@ -109,7 +123,7 @@ def fga_vs_ppg(playerName):
     y = np.array(y).reshape(-1,1)
 
     # creates the linear regression line
-    linearLine = linear_linearLine.LinearRegression()
+    linearLine = linear_model.LinearRegression()
     linearLine.fit(x,y)
 
     r2 = round(linearLine.score(x,y), 4)
