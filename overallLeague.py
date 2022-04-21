@@ -3,9 +3,7 @@ import pandas as pd
 import numpy as np
 from sklearn import linear_linearLine
 from nba_api.stats import endpoints
-from matplotlib import pyplot as plt
-
-import tkinter as tk
+from matplotlib import pyplot
 from tkinter import messagebox
 
 # Class imports
@@ -41,13 +39,13 @@ def tpfga_vs_ppg(playerName):
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    plt.scatter(x, y, s=15, alpha=.5)                                                   # Specifies the plot type
-    plt.title('NBA - Relationship Between 3-Point FG Attempted and Total Points')       # Title
-    plt.xlabel('Total 3-Point Field Goals Attempted')                                   # x-axis label
-    plt.ylabel('Total Points')                                                          # y-axis label
+    pyplot.scatter(x, y, s=15, alpha=.5)                                                   # Specifies the plot type
+    pyplot.title('NBA - Relationship Between 3-Point FG Attempted and Total Points')       # Title
+    pyplot.xlabel('Total 3-Point Field Goals Attempted')                                   # x-axis label
+    pyplot.ylabel('Total Points')                                                          # y-axis label
 
     if playerName == "":
-        plt.show()
+        pyplot.show()
         return
 
     playerName = playerName.title()
@@ -59,12 +57,12 @@ def tpfga_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+    pyplot.annotate(df.PLAYER[index[0]],                       # Index to name the player
         (x[index[0]], y[index[0]]),                         # Index to point to that player 
         (x[index[0]],y[index[0]]-5),                        # Coordinates to place the text
         arrowprops=dict(arrowstyle='-'))                    # type of line to draw towards point
-    plt.show()
-    plt.clf()
+    pyplot.show()
+    pyplot.clf()
     return
 
 def fgp_vs_ppg(playerName):
@@ -75,13 +73,13 @@ def fgp_vs_ppg(playerName):
     x = np.array(x).reshape(-1,1)
     y = np.array(y).reshape(-1,1)
 
-    plt.scatter(x, y, s=15, alpha=.5)                                       # Specifies the plot type
-    plt.title('NBA - Relationship Between FG % and Total Points')           # Title
-    plt.xlabel('Field Goal Percentage')                                     # x-axis label
-    plt.ylabel('Total Points')                                              # y-axis label
+    pyplot.scatter(x, y, s=15, alpha=.5)                                       # Specifies the plot type
+    pyplot.title('NBA - Relationship Between FG % and Total Points')           # Title
+    pyplot.xlabel('Field Goal Percentage')                                     # x-axis label
+    pyplot.ylabel('Total Points')                                              # y-axis label
 
     if playerName == "":
-        plt.show()
+        pyplot.show()
         return
 
     playerName = playerName.title()
@@ -93,11 +91,11 @@ def fgp_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+    pyplot.annotate(df.PLAYER[index[0]],                       # Index to name the player
         (x[index[0]], y[index[0]]),                         # Index to point to that player 
         arrowprops=dict(arrowstyle='-'))                    # type of line to draw towards point
-    plt.show()
-    plt.clf()
+    pyplot.show()
+    pyplot.clf()
     return
 
 
@@ -114,19 +112,19 @@ def fga_vs_ppg(playerName):
     linearLine = linear_linearLine.LinearRegression()
     linearLine.fit(x,y)
 
-    r2 = round(linearLine.score(x,y), 2 )
+    r2 = round(linearLine.score(x,y), 4)
     predicted_y = linearLine.predict(x)
 
 
-    plt.scatter(x, y, s=15, alpha=.5)                            
-    plt.plot(x, predicted_y, color = 'black')                   
-    plt.title('NBA - Relationship Between FGA and PPG')          
-    plt.xlabel('FGA per Game')                                  
-    plt.ylabel('Points Per Game')                                
-    plt.text(10,25, f'R2={r2}')                                  # labels the linear coorelation
+    pyplot.scatter(x, y, s=15, alpha=.5)                            
+    pyplot.plot(x, predicted_y, color = 'black')                   
+    pyplot.title('NBA - Relationship Between FGA and PPG')          
+    pyplot.xlabel('FGA per Game')                                  
+    pyplot.ylabel('Points Per Game')                                
+    pyplot.text(10,25, f'R2={r2}')                                  # labels the linear coorelation
 
     if playerName == "":
-        plt.show()
+        pyplot.show()
         return
 
     playerName = playerName.title()
@@ -138,10 +136,10 @@ def fga_vs_ppg(playerName):
             message="Please type in a valid NBA player")
         return
 
-    plt.annotate(df.PLAYER[index[0]],                       # Index to name the player
+    pyplot.annotate(df.PLAYER[index[0]],                       # Index to name the player
         (x[index[0]], y[index[0]]),                           # Index to point to that player 
         (x[index[0]]-3,y[index[0]]-2),                     # Coordinates to place the text
         arrowprops=dict(arrowstyle='-'))                   # type of line to draw towards point
-    plt.show()
-    plt.clf()
+    pyplot.show()
+    pyplot.clf()
     return
